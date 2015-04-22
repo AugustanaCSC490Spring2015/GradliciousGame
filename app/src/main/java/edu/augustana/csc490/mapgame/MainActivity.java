@@ -1,30 +1,15 @@
 package edu.augustana.csc490.mapgame;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import android.location.Address;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Random;
-
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.*;
-
 
 
 public class MainActivity extends Activity {
@@ -40,13 +25,13 @@ public class MainActivity extends Activity {
         ImageButton startButton = (ImageButton) findViewById(R.id.start);
         startButton.setOnClickListener(startButtonListener);
 
-        //SurfaceView background = (SurfaceView) findViewById(R.id.backgroundView);
+        ImageButton localMultiplayer = (ImageButton) findViewById(R.id.localMultiplayer);
+        startButton.setOnClickListener(localMultiplayerButtonListener);
 
-        //GifRun gifRun = new GifRun();
-        //gifRun.LoadGiff(background, this, R.drawable.background);
+        ImageButton multiplayer = (ImageButton) findViewById(R.id.multiplayer);
+        startButton.setOnClickListener(multiplayerButtonListener);
 
     }
-
 
     public View.OnClickListener startButtonListener = new View.OnClickListener() {
 
@@ -61,7 +46,32 @@ public class MainActivity extends Activity {
         }
     };
 
+    public View.OnClickListener localMultiplayerButtonListener = new View.OnClickListener() {
 
+        @Override
+        public void onClick(View view) {
+
+            Intent intent = new Intent(MainActivity.this, streetModeMultiplayer.class);
+            intent.putExtra("score", (float) 0);
+            intent.putExtra("round", 0);
+            intent.putExtra("playerNum", 0);
+            startActivity(intent);
+
+        }
+    };
+
+    public View.OnClickListener multiplayerButtonListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View view) {
+
+            Intent intent = new Intent(MainActivity.this, streetModeMultiplayer.class);
+            intent.putExtra("score", (float) 0);
+            intent.putExtra("round", 0);
+            startActivity(intent);
+
+        }
+    };
 
 
     @Override

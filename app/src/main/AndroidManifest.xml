@@ -25,6 +25,12 @@
             android:label="Scoring Mode"/>
         <activity android:name=".GameOver"
             android:label="Game Over Mode"/>
+        <activity android:name=".streetModeMultiplayer"
+            android:label="Street Mode Multiplayer"/>
+        <activity android:name=".MapModeMultiplayer"
+            android:label="Map Mode Multiplayer"/>
+        <activity android:name=".GameOverMultiplayer"
+            android:label="Game Over Multiplayer"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

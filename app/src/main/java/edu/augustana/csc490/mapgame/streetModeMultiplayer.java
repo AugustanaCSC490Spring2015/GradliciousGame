@@ -28,16 +28,19 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
 
-public class StreetMode extends Activity implements OnStreetViewPanoramaReadyCallback, PopupMenu.OnMenuItemClickListener {
+public class streetModeMultiplayer extends Activity implements OnStreetViewPanoramaReadyCallback, PopupMenu.OnMenuItemClickListener {
 
     StreetViewPanorama mainPanorama;
     String actualPosition;
-    float score;
+    float scorePlayer0;
+    float scorePlayer1;
     int round;
     SharedPreferences visitedLocations;
     SharedPreferences.Editor visitedLocationsEditor;
 
     Boolean repeatLocations = false;
+
+    int playerNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +52,17 @@ public class StreetMode extends Activity implements OnStreetViewPanoramaReadyCal
 
         Intent intent = getIntent();
         actualPosition = intent.getStringExtra("actualPosition");
-        score = intent.getFloatExtra("score", -1);
+
         round = intent.getIntExtra("round",-1);
+
+        scorePlayer0 = intent.getFloatExtra("scorePlayer0", -1);
+        scorePlayer1 = intent.getFloatExtra("scorePlayer1", -1);
+
+        playerNum = intent.getIntExtra("playerNum", -1);
 
         setContentView(R.layout.streetview);
         ImageButton switchToMap = (ImageButton) findViewById(R.id.button1);
         switchToMap.setOnClickListener(switchToMapListener);
-
 
         StreetViewPanoramaFragment panoramaFragment = (StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetviewpanorama);
         panoramaFragment.getStreetViewPanoramaAsync(this);
@@ -105,9 +112,13 @@ public class StreetMode extends Activity implements OnStreetViewPanoramaReadyCal
 
             actualPosition = mainPanorama.getLocation().position.toString();
             Log.w("PanoID", mainPanorama.getLocation().panoId);
-            Intent intent = new Intent(StreetMode.this, MapModeMultiplayer.class);
+            Intent intent = new Intent(streetModeMultiplayer.this, MapModeMultiplayer.class);
             intent.putExtra("actualPosition", actualPosition);
-            intent.putExtra("score", score);
+            if(playerNum == 0) {
+                intent.putExtra("score", scorePlayer0);
+            }else if(playerNum == 1){
+                intent.putExtra("score", scorePlayer1);
+            }
             intent.putExtra("round", round);
             startActivity(intent);
 
@@ -313,7 +324,7 @@ public class StreetMode extends Activity implements OnStreetViewPanoramaReadyCal
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.optionsMainMenu:
-                Intent i = new Intent(StreetMode.this, MainActivity.class);
+                Intent i = new Intent(streetModeMultiplayer.this, MainActivity.class);
                 startActivity(i);
                 return true;
             case R.id.optionsResetLocations:

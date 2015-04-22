@@ -18,9 +18,10 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 
-public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListener {
+public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuItemClickListener {
 
-    float score;
+    float scorePlayer0;
+    float scorePlayer1;
     SharedPreferences highScorePref;
     SharedPreferences.Editor highScoreEditor;
 
@@ -32,20 +33,13 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent = getIntent();
-        score = intent.getFloatExtra("score", -1);
+        scorePlayer0 = intent.getFloatExtra("scorePlayer0", -1);
+        scorePlayer1 = intent.getFloatExtra("scorePlayer1", -1);
 
-        highScorePref = this.getSharedPreferences("scores", Context.MODE_PRIVATE);
-        highScoreEditor = highScorePref.edit();
-
-        int highScore = highScorePref.getInt("highscore", 1000000000);
-
-        int scoreInt = Integer.parseInt(String.format("%.0f", score));
-        Log.w("scoreInt", Integer.toString(scoreInt));
-
-        if(scoreInt < highScore) {
-            highScoreEditor.putInt("highscore", scoreInt);
-            highScoreEditor.commit();
-        }
+        int scoreIntPlayer0 = Integer.parseInt(String.format("%.0f", scorePlayer0));
+        Log.w("scoreIntPlayer0", Integer.toString(scoreIntPlayer0));
+        int scoreIntPlayer1 = Integer.parseInt(String.format("%.0f", scorePlayer1));
+        Log.w("scoreIntPlayer0", Integer.toString(scoreIntPlayer1));
 
         setContentView(R.layout.gameover);
         ImageButton playAgainButton = (ImageButton) findViewById(R.id.playAgain);
@@ -55,8 +49,8 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
         TextView gameOverScore = (TextView) findViewById(R.id.gameOverScore);
         TextView bestScore = (TextView) findViewById(R.id.bestScore);
 
-        gameOverScore.setText("Total Score: " + String.format("%.0f", score) + " km");
-        bestScore.setText("Best Score: "+ Integer.toString(highScorePref.getInt("highscore", -1000)) + " km");
+        gameOverScore.setText("Player 1: " + String.format("%.0f", scorePlayer0) + " km");
+        bestScore.setText("Player 2: "+ String.format("%.0f", scorePlayer1) + " km");
 
 
         SharedPreferences locations = this.getSharedPreferences("locations", Context.MODE_PRIVATE);
@@ -70,7 +64,7 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
         @Override
         public void onClick(View view) {
 
-            Intent intent = new Intent(GameOver.this, StreetMode.class);
+            Intent intent = new Intent(GameOverMultiplayer.this, StreetMode.class);
             intent.putExtra("score", (float) 0);
             intent.putExtra("round", 0);
             startActivity(intent);
@@ -112,7 +106,7 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.optionsMainMenu:
-                Intent i = new Intent(GameOver.this, MainActivity.class);
+                Intent i = new Intent(GameOverMultiplayer.this, MainActivity.class);
                 startActivity(i);
                 return true;
             case R.id.optionsResetLocations:

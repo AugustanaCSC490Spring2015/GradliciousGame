@@ -1,11 +1,9 @@
 package edu.augustana.csc490.mapgame;
 
 import android.app.Activity;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,22 +11,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import android.location.Address;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 import android.widget.TextView;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Random;
-
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.*;
 
 
 public class ScoringScreen extends Activity implements PopupMenu.OnMenuItemClickListener {
@@ -76,7 +64,7 @@ public class ScoringScreen extends Activity implements PopupMenu.OnMenuItemClick
                 @Override
                 public void run() {
 
-                    Intent intent2 = new Intent(ScoringScreen.this,GameOver.class);
+                    Intent intent2 = new Intent(ScoringScreen.this,GameOverMultiplayer.class);
                     intent2.putExtra("score",score);
                     startActivity(intent2);
 

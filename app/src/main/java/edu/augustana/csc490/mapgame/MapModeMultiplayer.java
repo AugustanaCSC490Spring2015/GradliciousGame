@@ -23,13 +23,16 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
 
-public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.OnMenuItemClickListener {
+public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, PopupMenu.OnMenuItemClickListener {
 
     GoogleMap mainMap;
     String actualPosition;
     Marker myMarker;
-    float score;
+    float scorePlayer0;
+    float scorePlayer1;
     int round;
+
+    int playerNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,11 @@ public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.O
 
         Intent intent = getIntent();
         actualPosition = intent.getStringExtra("actualPosition");
-        score = intent.getFloatExtra("score", -1);
+
+        scorePlayer0 = intent.getFloatExtra("score", -1);
+        scorePlayer1 = intent.getFloatExtra("score", -1);
+        playerNum = intent.getIntExtra("playerNum", -1);
+
         round = intent.getIntExtra("round",-1);
 
         Log.w("position", actualPosition);
@@ -82,9 +89,13 @@ public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.O
         @Override
         public void onClick(View view) {
 
-            Intent intent = new Intent(MapMode.this, StreetMode.class);
+            Intent intent = new Intent(MapModeMultiplayer.this, StreetMode.class);
             intent.putExtra("actualPosition", actualPosition);
-            intent.putExtra("score", score);
+            if(playerNum == 0) {
+                intent.putExtra("score", scorePlayer0);
+            }else if(playerNum == 1){
+                intent.putExtra("score", scorePlayer1);
+            }
             intent.putExtra("round", round);
             startActivity(intent);
         }
@@ -133,9 +144,13 @@ public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.O
                 @Override
                 public void run() {
 
-                    Intent intent = new Intent(MapMode.this, ScoringScreen.class);
+                    Intent intent = new Intent(MapModeMultiplayer.this, ScoringScreen.class);
                     intent.putExtra("newScore", String.format("%.0f", calculateScore()));
-                    intent.putExtra("score", score);
+                    if(playerNum == 0) {
+                        intent.putExtra("score", scorePlayer0);
+                    }else if(playerNum == 1){
+                        intent.putExtra("score", scorePlayer1);
+                    }
                     intent.putExtra("round", round);
                     startActivity(intent);
 
@@ -191,7 +206,11 @@ public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.O
 
         float newScore = results[0]/1000;
 
-        score += newScore;
+        if(playerNum == 0) {
+            scorePlayer0 += newScore;
+        }else if(playerNum == 1){
+            scorePlayer1 += newScore;
+        }
 
         return  newScore;
 
@@ -239,7 +258,7 @@ public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.O
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.optionsMainMenu:
-                Intent i = new Intent(MapMode.this, MainActivity.class);
+                Intent i = new Intent(MapModeMultiplayer.this, MainActivity.class);
                 startActivity(i);
                 return true;
             case R.id.optionsResetLocations:
