@@ -28,7 +28,7 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
 
-public class streetModeMultiplayer extends Activity implements OnStreetViewPanoramaReadyCallback, PopupMenu.OnMenuItemClickListener {
+public class StreetMode_Multiplayer extends Activity implements OnStreetViewPanoramaReadyCallback, PopupMenu.OnMenuItemClickListener {
 
     StreetViewPanorama mainPanorama;
     String actualPosition;
@@ -49,6 +49,7 @@ public class streetModeMultiplayer extends Activity implements OnStreetViewPanor
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Log.w("StreetModeMulti",Integer.toString(playerNum));
 
         Intent intent = getIntent();
         actualPosition = intent.getStringExtra("actualPosition");
@@ -112,12 +113,13 @@ public class streetModeMultiplayer extends Activity implements OnStreetViewPanor
 
             actualPosition = mainPanorama.getLocation().position.toString();
             Log.w("PanoID", mainPanorama.getLocation().panoId);
-            Intent intent = new Intent(streetModeMultiplayer.this, MapModeMultiplayer.class);
+            Intent intent = new Intent(StreetMode_Multiplayer.this, MapModeMultiplayer.class);
             intent.putExtra("actualPosition", actualPosition);
+            intent.putExtra("playerNum",  playerNum);
             if(playerNum == 0) {
-                intent.putExtra("score", scorePlayer0);
+                intent.putExtra("scorePlayer0", scorePlayer0);
             }else if(playerNum == 1){
-                intent.putExtra("score", scorePlayer1);
+                intent.putExtra("scorePlayer1", scorePlayer1);
             }
             intent.putExtra("round", round);
             startActivity(intent);
@@ -324,7 +326,7 @@ public class streetModeMultiplayer extends Activity implements OnStreetViewPanor
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.optionsMainMenu:
-                Intent i = new Intent(streetModeMultiplayer.this, MainActivity.class);
+                Intent i = new Intent(StreetMode_Multiplayer.this, MainActivity.class);
                 startActivity(i);
                 return true;
             case R.id.optionsResetLocations:

@@ -25,11 +25,8 @@ public class MainActivity extends Activity {
         ImageButton startButton = (ImageButton) findViewById(R.id.start);
         startButton.setOnClickListener(startButtonListener);
 
-        ImageButton localMultiplayer = (ImageButton) findViewById(R.id.localMultiplayer);
-        startButton.setOnClickListener(localMultiplayerButtonListener);
-
         ImageButton multiplayer = (ImageButton) findViewById(R.id.multiplayer);
-        startButton.setOnClickListener(multiplayerButtonListener);
+        multiplayer.setOnClickListener(multiplayerButtonListener);
 
     }
 
@@ -46,28 +43,16 @@ public class MainActivity extends Activity {
         }
     };
 
-    public View.OnClickListener localMultiplayerButtonListener = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View view) {
-
-            Intent intent = new Intent(MainActivity.this, streetModeMultiplayer.class);
-            intent.putExtra("score", (float) 0);
-            intent.putExtra("round", 0);
-            intent.putExtra("playerNum", 0);
-            startActivity(intent);
-
-        }
-    };
 
     public View.OnClickListener multiplayerButtonListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View view) {
 
-            Intent intent = new Intent(MainActivity.this, streetModeMultiplayer.class);
+            Intent intent = new Intent(MainActivity.this, StreetMode_Multiplayer.class);
             intent.putExtra("score", (float) 0);
             intent.putExtra("round", 0);
+            intent.putExtra("playerNum", 0);
             startActivity(intent);
 
         }

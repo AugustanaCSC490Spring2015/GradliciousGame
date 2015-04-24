@@ -40,12 +40,13 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Log.w("MapModeMulti",Integer.toString(playerNum));
 
         Intent intent = getIntent();
         actualPosition = intent.getStringExtra("actualPosition");
 
-        scorePlayer0 = intent.getFloatExtra("score", -1);
-        scorePlayer1 = intent.getFloatExtra("score", -1);
+        scorePlayer0 = intent.getFloatExtra("scorePlayer0", -1);
+        scorePlayer1 = intent.getFloatExtra("scorePlayer1", -1);
         playerNum = intent.getIntExtra("playerNum", -1);
 
         round = intent.getIntExtra("round",-1);
@@ -89,14 +90,15 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
         @Override
         public void onClick(View view) {
 
-            Intent intent = new Intent(MapModeMultiplayer.this, StreetMode.class);
+            Intent intent = new Intent(MapModeMultiplayer.this, StreetMode_Multiplayer.class);
             intent.putExtra("actualPosition", actualPosition);
             if(playerNum == 0) {
-                intent.putExtra("score", scorePlayer0);
+                intent.putExtra("scorePlayer0", scorePlayer0);
             }else if(playerNum == 1){
-                intent.putExtra("score", scorePlayer1);
+                intent.putExtra("scorePlayer1", scorePlayer1);
             }
             intent.putExtra("round", round);
+            intent.putExtra("playerNum",  playerNum);
             startActivity(intent);
         }
     };
@@ -144,14 +146,17 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
                 @Override
                 public void run() {
 
-                    Intent intent = new Intent(MapModeMultiplayer.this, ScoringScreen.class);
+                    Intent intent = new Intent(MapModeMultiplayer.this, ScoringScreenMultiplayer.class);
                     intent.putExtra("newScore", String.format("%.0f", calculateScore()));
                     if(playerNum == 0) {
                         intent.putExtra("score", scorePlayer0);
+                        intent.putExtra("actualPosition", actualPosition);
                     }else if(playerNum == 1){
                         intent.putExtra("score", scorePlayer1);
+                        intent.putExtra("actualPosition", actualPosition);
                     }
                     intent.putExtra("round", round);
+                    intent.putExtra("playerNum",  playerNum);
                     startActivity(intent);
 
                 }
