@@ -41,17 +41,25 @@ public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuIte
         int scoreIntPlayer1 = Integer.parseInt(String.format("%.0f", scorePlayer1));
         Log.w("scoreIntPlayer0", Integer.toString(scoreIntPlayer1));
 
-        setContentView(R.layout.gameover);
+        setContentView(R.layout.gameover_multiplayer);
         ImageButton playAgainButton = (ImageButton) findViewById(R.id.playAgain);
         playAgainButton.setOnClickListener(startButtonListener);
 
 
-        TextView gameOverScore = (TextView) findViewById(R.id.gameOverScore);
-        TextView bestScore = (TextView) findViewById(R.id.bestScore);
+        TextView scorePlayer0View = (TextView) findViewById(R.id.scorePlayer0View);
+        TextView scorePlayer1View = (TextView) findViewById(R.id.scorePlayer1View);
+        TextView winnerTextView = (TextView) findViewById(R.id.winner);
 
-        gameOverScore.setText("Player 1: " + String.format("%.0f", scorePlayer0) + " km");
-        bestScore.setText("Player 2: "+ String.format("%.0f", scorePlayer1) + " km");
+        scorePlayer0View.setText("Player 1: " + String.format("%.0f", scorePlayer0) + " km");
+        scorePlayer1View.setText("Player 2: "+ String.format("%.0f", scorePlayer1) + " km");
 
+        if(scorePlayer0 < scorePlayer1){
+            winnerTextView.setText("Player 1 Wins!");
+        }else if(scorePlayer1 < scorePlayer0){
+            winnerTextView.setText("Player 2 Wins!");
+        }else{
+            winnerTextView.setText("Tie");
+        }
 
         SharedPreferences locations = this.getSharedPreferences("locations", Context.MODE_PRIVATE);
         Log.w("Locations SharedPreferences", locations.getAll().toString());

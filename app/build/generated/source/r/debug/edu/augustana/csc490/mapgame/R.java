@@ -479,9 +479,10 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main=0x7f040000;
         public static final int gameover=0x7f040001;
-        public static final int mapview=0x7f040002;
-        public static final int scoringscreen=0x7f040003;
-        public static final int streetview=0x7f040004;
+        public static final int gameover_multiplayer=0x7f040002;
+        public static final int mapview=0x7f040003;
+        public static final int scoringscreen=0x7f040004;
+        public static final int streetview=0x7f040005;
     }
     public static final class menu {
         public static final int actions=0x7f0b0000;

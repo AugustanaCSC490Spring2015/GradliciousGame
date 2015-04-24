@@ -63,6 +63,8 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
         scoreView.setText("Last Round: " + newScore + " km");
         totalScore.setText("Total Score: " + String.format("%.0f", score) + " km");
 
+        TextView playerNumView = (TextView) findViewById(R.id.playerNumView);
+        playerNumView.setText("Player:" + (playerNum+1));
 
         if(round >= 5){
             nextLocationButton.setVisibility(View.GONE);

@@ -68,6 +68,8 @@ public class StreetMode_Multiplayer extends Activity implements OnStreetViewPano
         StreetViewPanoramaFragment panoramaFragment = (StreetViewPanoramaFragment) getFragmentManager().findFragmentById(R.id.streetviewpanorama);
         panoramaFragment.getStreetViewPanoramaAsync(this);
 
+        TextView playerNumView = (TextView) findViewById(R.id.playerNumView);
+        playerNumView.setText("Player:" + (playerNum+1));
     }
 
     @Override

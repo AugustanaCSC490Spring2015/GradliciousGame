@@ -67,7 +67,8 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapviewfragment);
         mapFragment.getMapAsync(this);
 
-
+        TextView playerNumView = (TextView) findViewById(R.id.playerNumView);
+        playerNumView.setText("Player:" + (playerNum+1));
 
 
     }
