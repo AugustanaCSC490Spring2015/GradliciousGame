@@ -61,7 +61,7 @@ public class StreetMode_Multiplayer extends Activity implements OnStreetViewPano
 
         playerNum = intent.getIntExtra("playerNum", -1);
 
-        setContentView(R.layout.streetview);
+        setContentView(R.layout.streetview_multiplayer);
         ImageButton switchToMap = (ImageButton) findViewById(R.id.button1);
         switchToMap.setOnClickListener(switchToMapListener);
 
@@ -118,11 +118,10 @@ public class StreetMode_Multiplayer extends Activity implements OnStreetViewPano
             Intent intent = new Intent(StreetMode_Multiplayer.this, MapModeMultiplayer.class);
             intent.putExtra("actualPosition", actualPosition);
             intent.putExtra("playerNum",  playerNum);
-            if(playerNum == 0) {
-                intent.putExtra("scorePlayer0", scorePlayer0);
-            }else if(playerNum == 1){
-                intent.putExtra("scorePlayer1", scorePlayer1);
-            }
+
+            intent.putExtra("scorePlayer0", scorePlayer0);
+            intent.putExtra("scorePlayer1", scorePlayer1);
+
             intent.putExtra("round", round);
             startActivity(intent);
 

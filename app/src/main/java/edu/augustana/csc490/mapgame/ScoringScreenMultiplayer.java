@@ -23,7 +23,6 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
 
 
     String newScore;
-    float score;
     int round;
     int playerNum;
     String actualPosition;
@@ -39,7 +38,6 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
 
         Intent intent = getIntent();
         newScore = intent.getStringExtra("newScore");
-        score = intent.getFloatExtra("score", -1);
         round = intent.getIntExtra("round",-1);
         playerNum = intent.getIntExtra("playerNum", -1);
         Log.w("ScoringScreenMulti",Integer.toString(playerNum));
@@ -47,7 +45,7 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
         scorePlayer0 = intent.getFloatExtra("scorePlayer0", -1);
         scorePlayer1 = intent.getFloatExtra("scorePlayer1", -1);
 
-        setContentView(R.layout.scoringscreen);
+        setContentView(R.layout.scoringscreen_multiplayer);
         ImageButton nextLocationButton = (ImageButton) findViewById(R.id.newLoc);
         nextLocationButton.setOnClickListener(nextLocButtonListener);
 
@@ -58,15 +56,18 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
         TextView roundNumView = (TextView) findViewById(R.id.roundNumView);
         roundNumView.setText("Round "+ Integer.toString(round));
 
-
         Log.w("newScore","" + newScore);
         scoreView.setText("Last Round: " + newScore + " km");
-        totalScore.setText("Total Score: " + String.format("%.0f", score) + " km");
+        if(playerNum == 0) {
+            totalScore.setText("Total Score: " + String.format("%.0f", scorePlayer0) + " km");
+        }else{
+            totalScore.setText("Total Score: " + String.format("%.0f", scorePlayer1) + " km");
+        }
 
         TextView playerNumView = (TextView) findViewById(R.id.playerNumView);
         playerNumView.setText("Player:" + (playerNum+1));
 
-        if(round >= 5){
+        if(round >= 2 && playerNum == 1){
             nextLocationButton.setVisibility(View.GONE);
 
             /////////////// http://stackoverflow.com/questions/7965494/how-to-put-some-delay-in-calling-an-activity-from-another-activity
@@ -76,7 +77,6 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
                 public void run() {
 
                     Intent intent2 = new Intent(ScoringScreenMultiplayer.this,GameOverMultiplayer.class);
-                    intent2.putExtra("score",score);
                     intent2.putExtra("scorePlayer0", scorePlayer0);
                     intent2.putExtra("scorePlayer1", scorePlayer1);
                     startActivity(intent2);
@@ -126,7 +126,6 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
         public void onClick(View view) {
 
             Intent intent = new Intent(ScoringScreenMultiplayer.this, StreetMode_Multiplayer.class);
-            intent.putExtra("score", score);
             intent.putExtra("round", round);
             if(playerNum == 0){
                 intent.putExtra("playerNum", 1);
@@ -136,6 +135,8 @@ public class ScoringScreenMultiplayer extends Activity implements PopupMenu.OnMe
                 intent.putExtra("playerNum", 0);
                 Log.w("playerNum = 1","");
             }
+            intent.putExtra("scorePlayer0", scorePlayer0);
+            intent.putExtra("scorePlayer1", scorePlayer1);
             startActivity(intent);
 
         }

@@ -415,15 +415,15 @@ containing a value of this type.
         public static final int powered_by_google_light=0x7f020025;
     }
     public static final class id {
-        public static final int action_settings=0x7f0c0038;
+        public static final int action_settings=0x7f0c003c;
         public static final int adjust_height=0x7f0c0000;
         public static final int adjust_width=0x7f0c0001;
         public static final int backgroundGameOver=0x7f0c001d;
         public static final int backgroundView=0x7f0c0018;
         public static final int bestScore=0x7f0c0023;
         public static final int book_now=0x7f0c0010;
-        public static final int button1=0x7f0c0033;
-        public static final int button2=0x7f0c002b;
+        public static final int button1=0x7f0c0037;
+        public static final int button2=0x7f0c002e;
         public static final int buyButton=0x7f0c000c;
         public static final int buy_now=0x7f0c0011;
         public static final int buy_with_google=0x7f0c0012;
@@ -432,19 +432,19 @@ containing a value of this type.
         public static final int gameOverLayout=0x7f0c001c;
         public static final int gameOverScore=0x7f0c0021;
         public static final int grayscale=0x7f0c0015;
-        public static final int gridLayout=0x7f0c002f;
+        public static final int gridLayout=0x7f0c0033;
         public static final int gridLayout2=0x7f0c0028;
-        public static final int gridLayout3=0x7f0c0034;
-        public static final int gridLayout4=0x7f0c002e;
+        public static final int gridLayout3=0x7f0c0038;
+        public static final int gridLayout4=0x7f0c0032;
         public static final int gridLayout5=0x7f0c0026;
         public static final int gridLayout6=0x7f0c0020;
         public static final int holo_dark=0x7f0c0007;
         public static final int holo_light=0x7f0c0008;
         public static final int hybrid=0x7f0c0003;
         public static final int imageView=0x7f0c0019;
-        public static final int imageView2=0x7f0c002d;
+        public static final int imageView2=0x7f0c0031;
         public static final int imageView3=0x7f0c001e;
-        public static final int mapviewfragment=0x7f0c002a;
+        public static final int mapviewfragment=0x7f0c002d;
         public static final int match_parent=0x7f0c000e;
         public static final int monochrome=0x7f0c0016;
         public static final int multiplayer=0x7f0c001b;
@@ -452,25 +452,29 @@ containing a value of this type.
         public static final int none=0x7f0c0002;
         public static final int normal=0x7f0c0004;
         public static final int optionsButton=0x7f0c0027;
-        public static final int optionsMainMenu=0x7f0c0035;
-        public static final int optionsResetBestScore=0x7f0c0037;
-        public static final int optionsResetLocations=0x7f0c0036;
+        public static final int optionsMainMenu=0x7f0c0039;
+        public static final int optionsResetBestScore=0x7f0c003b;
+        public static final int optionsResetLocations=0x7f0c003a;
         public static final int playAgain=0x7f0c001f;
+        public static final int playerNumView=0x7f0c0030;
         public static final int production=0x7f0c0009;
         public static final int relativeLayout=0x7f0c0017;
-        public static final int roundNumView=0x7f0c002c;
+        public static final int roundNumView=0x7f0c002f;
         public static final int sandbox=0x7f0c000a;
         public static final int satellite=0x7f0c0005;
-        public static final int scoreTextView=0x7f0c0030;
+        public static final int scorePlayer0View=0x7f0c002a;
+        public static final int scorePlayer1View=0x7f0c002b;
+        public static final int scoreTextView=0x7f0c0034;
         public static final int selectionDetails=0x7f0c000d;
         public static final int start=0x7f0c001a;
-        public static final int streetviewpanorama=0x7f0c0032;
+        public static final int streetviewpanorama=0x7f0c0036;
         public static final int strict_sandbox=0x7f0c000b;
         public static final int submitButton=0x7f0c0029;
         public static final int terrain=0x7f0c0006;
         public static final int textView=0x7f0c0024;
         public static final int textView2=0x7f0c0022;
-        public static final int totalScore=0x7f0c0031;
+        public static final int totalScore=0x7f0c0035;
+        public static final int winner=0x7f0c002c;
         public static final int wrap_content=0x7f0c000f;
     }
     public static final class integer {
@@ -481,8 +485,11 @@ containing a value of this type.
         public static final int gameover=0x7f040001;
         public static final int gameover_multiplayer=0x7f040002;
         public static final int mapview=0x7f040003;
-        public static final int scoringscreen=0x7f040004;
-        public static final int streetview=0x7f040005;
+        public static final int mapview_multiplayer=0x7f040004;
+        public static final int scoringscreen=0x7f040005;
+        public static final int scoringscreen_multiplayer=0x7f040006;
+        public static final int streetview=0x7f040007;
+        public static final int streetview_multiplayer=0x7f040008;
     }
     public static final class menu {
         public static final int actions=0x7f0b0000;

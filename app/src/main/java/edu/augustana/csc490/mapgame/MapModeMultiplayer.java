@@ -53,7 +53,7 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
 
         Log.w("position", actualPosition);
 
-        setContentView(R.layout.mapview);
+        setContentView(R.layout.mapview_multiplayer);
 
         TextView roundNumView = (TextView) findViewById(R.id.roundNumView);
         roundNumView.setText("Round "+ Integer.toString(round));
@@ -93,11 +93,10 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
 
             Intent intent = new Intent(MapModeMultiplayer.this, StreetMode_Multiplayer.class);
             intent.putExtra("actualPosition", actualPosition);
-            if(playerNum == 0) {
-                intent.putExtra("scorePlayer0", scorePlayer0);
-            }else if(playerNum == 1){
-                intent.putExtra("scorePlayer1", scorePlayer1);
-            }
+
+            intent.putExtra("scorePlayer0", scorePlayer0);
+            intent.putExtra("scorePlayer1", scorePlayer1);
+
             intent.putExtra("round", round);
             intent.putExtra("playerNum",  playerNum);
             startActivity(intent);
@@ -149,13 +148,11 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
 
                     Intent intent = new Intent(MapModeMultiplayer.this, ScoringScreenMultiplayer.class);
                     intent.putExtra("newScore", String.format("%.0f", calculateScore()));
-                    if(playerNum == 0) {
-                        intent.putExtra("score", scorePlayer0);
-                        intent.putExtra("actualPosition", actualPosition);
-                    }else if(playerNum == 1){
-                        intent.putExtra("score", scorePlayer1);
-                        intent.putExtra("actualPosition", actualPosition);
-                    }
+
+                    intent.putExtra("scorePlayer0", scorePlayer0);
+                    intent.putExtra("scorePlayer1", scorePlayer1);
+
+                    intent.putExtra("actualPosition", actualPosition);
                     intent.putExtra("round", round);
                     intent.putExtra("playerNum",  playerNum);
                     startActivity(intent);
