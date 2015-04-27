@@ -24,6 +24,9 @@ public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuIte
     float scorePlayer1;
     SharedPreferences highScorePref;
     SharedPreferences.Editor highScoreEditor;
+    TextView scorePlayer0View;
+    TextView scorePlayer1View;
+    TextView winnerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +48,29 @@ public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuIte
         ImageButton playAgainButton = (ImageButton) findViewById(R.id.playAgain);
         playAgainButton.setOnClickListener(startButtonListener);
 
+        initiateViews();
+        displayWinner();
 
-        TextView scorePlayer0View = (TextView) findViewById(R.id.scorePlayer0View);
-        TextView scorePlayer1View = (TextView) findViewById(R.id.scorePlayer1View);
-        TextView winnerTextView = (TextView) findViewById(R.id.winner);
 
+        SharedPreferences locations = this.getSharedPreferences("locations", Context.MODE_PRIVATE);
+        Log.w("Locations SharedPreferences", locations.getAll().toString());
+
+    }
+
+    public void initiateViews(){
+        //Player 1's score
+        scorePlayer0View = (TextView) findViewById(R.id.scorePlayer0View);
+        //Player 2's score
+        scorePlayer1View = (TextView) findViewById(R.id.scorePlayer1View);
+        winnerTextView = (TextView) findViewById(R.id.winner);
+    }
+
+    public void displayWinner(){
         scorePlayer0View.setText("Player 1: " + String.format("%.0f", scorePlayer0) + " km");
         scorePlayer1View.setText("Player 2: "+ String.format("%.0f", scorePlayer1) + " km");
 
+        //check to see whose score is higher or if the game is a tie
+        //and set score accordingly
         if(scorePlayer0 < scorePlayer1){
             winnerTextView.setText("Player 1 Wins!");
         }else if(scorePlayer1 < scorePlayer0){
@@ -60,13 +78,9 @@ public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuIte
         }else{
             winnerTextView.setText("Tie");
         }
-
-        SharedPreferences locations = this.getSharedPreferences("locations", Context.MODE_PRIVATE);
-        Log.w("Locations SharedPreferences", locations.getAll().toString());
-
     }
 
-
+    //Listener for the start button
     public View.OnClickListener startButtonListener = new View.OnClickListener() {
 
         @Override

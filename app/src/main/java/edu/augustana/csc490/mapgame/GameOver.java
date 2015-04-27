@@ -23,6 +23,8 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
     float score;
     SharedPreferences highScorePref;
     SharedPreferences.Editor highScoreEditor;
+    TextView gameOverScore;
+    TextView bestScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +53,19 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
         ImageButton playAgainButton = (ImageButton) findViewById(R.id.playAgain);
         playAgainButton.setOnClickListener(startButtonListener);
 
-
-        TextView gameOverScore = (TextView) findViewById(R.id.gameOverScore);
-        TextView bestScore = (TextView) findViewById(R.id.bestScore);
-
-        gameOverScore.setText("Total Score: " + String.format("%.0f", score) + " km");
-        bestScore.setText("Best Score: "+ Integer.toString(highScorePref.getInt("highscore", -1000)) + " km");
-
+        displayEndGame();
 
         SharedPreferences locations = this.getSharedPreferences("locations", Context.MODE_PRIVATE);
         Log.w("Locations SharedPreferences", locations.getAll().toString());
 
+    }
+
+    public void displayEndGame(){
+        gameOverScore = (TextView) findViewById(R.id.gameOverScore);
+        bestScore = (TextView) findViewById(R.id.bestScore);
+
+        gameOverScore.setText("Total Score: " + String.format("%.0f", score) + " km");
+        bestScore.setText("Best Score: "+ Integer.toString(highScorePref.getInt("highscore", -1000)) + " km");
     }
 
 
