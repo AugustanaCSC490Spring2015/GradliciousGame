@@ -46,25 +46,23 @@ public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.O
 
         setContentView(R.layout.mapview);
 
-        setRoundNumber(intent);
+        /*setRoundNumber(intent);
 
         switchToStreetView();
 
         createSubmitButton();
 
-        getMap();
+        getMap();*/
 
-        /*
-        MapInstantiater singlePlayerMapSetup = new MapInstantiater(intent);
+        MapInstantiater singlePlayerMapSetup = new MapInstantiater(intent, 0, this);
 
         round = singlePlayerMapSetup.setRoundNumber();
 
-        singlePlayerMapSetup.setSwitchToStreetViewListener();
+        singlePlayerMapSetup.setSwitchToStreetViewListener(0);
 
-        singlePlayerMapSetup.setSubmitButtonListener();
+        singlePlayerMapSetup.setSubmitButtonListener(0);
 
         singlePlayerMapSetup.getMap();
-         */
 
     }
 

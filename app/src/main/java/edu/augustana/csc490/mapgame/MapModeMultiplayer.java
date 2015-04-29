@@ -53,25 +53,25 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
 
         setContentView(R.layout.mapview_multiplayer);
 
-        setRoundNumber(intent);
+        /*setRoundNumber(intent);
 
         switchToStreetView();
 
         createSubmitButton();
 
-        getMap();
+        getMap();*/
 
-        /*
-        MapInstantiater multiPlayerMapSetup = new MapInstantiater(intent);
 
-        round = singlePlayerMapSetup.setRoundNumber();
+        MapInstantiater multiPlayerMapSetup = new MapInstantiater(intent, 1, this);
 
-        singlePlayerMapSetup.setSwitchToStreetViewListener();
+        round = multiPlayerMapSetup.setRoundNumber();
 
-        singlePlayerMapSetup.setSubmitButtonListener();
+        multiPlayerMapSetup.setSwitchToStreetViewListener(1);
 
-        singlePlayerMapSetup.getMap();
-         */
+        multiPlayerMapSetup.setSubmitButtonListener(1);
+
+        multiPlayerMapSetup.getMap();
+
 
         TextView playerNumView = (TextView) findViewById(R.id.playerNumView);
         playerNumView.setText("Player:" + (playerNum+1));

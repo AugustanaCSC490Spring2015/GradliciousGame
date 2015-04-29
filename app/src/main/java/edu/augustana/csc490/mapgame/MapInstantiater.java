@@ -28,10 +28,16 @@ import com.google.android.gms.maps.model.*;
 public class MapInstantiater extends Activity {
 
     Intent intent;
-    MapMode mode;
+    MapModeMultiplayer multiPlayer;
+    MapMode singlePlayer;
 
-    public MapInstantiater(Intent intent){
+    public MapInstantiater(Intent intent, int indicator, Object caller){
         this.intent = intent;
+        if(indicator == 0){
+            singlePlayer = (MapMode) caller;
+        } else{
+            multiPlayer = (MapModeMultiplayer) caller;
+        }
     }
 
     public int setRoundNumber(){
@@ -41,14 +47,26 @@ public class MapInstantiater extends Activity {
         return round;
     }
 
-    public void setSwitchToStreetViewListener(){
+    public void setSwitchToStreetViewListener(int indicator){
         ImageButton switchToStreet = (ImageButton) findViewById(R.id.button2);
-        switchToStreet.setOnClickListener(switchToStreetListener);
+        switch(indicator){
+            case 0:
+                switchToStreet.setOnClickListener(singlePlayer.switchToStreetListener);
+            case 1:
+                switchToStreet.setOnClickListener(multiPlayer.switchToStreetListener);
+        }
+
     }
 
-    public void setSubmitButtonListener(){
+    public void setSubmitButtonListener(int indicator){
         ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
-        submitButton.setOnClickListener(switchToScoring);
+        switch(indicator){
+            case 0:
+                submitButton.setOnClickListener(singlePlayer.switchToScoring);
+            case 1:
+                submitButton.setOnClickListener(multiPlayer.switchToScoring);
+        }
+
     }
 
     public void getMap(){
