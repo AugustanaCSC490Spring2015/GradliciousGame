@@ -36,19 +36,13 @@ public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuIte
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Intent intent = getIntent();
-        scorePlayer0 = intent.getFloatExtra("scorePlayer0", -1);
-        scorePlayer1 = intent.getFloatExtra("scorePlayer1", -1);
-
-        int scoreIntPlayer0 = Integer.parseInt(String.format("%.0f", scorePlayer0));
-        Log.w("scoreIntPlayer0", Integer.toString(scoreIntPlayer0));
-        int scoreIntPlayer1 = Integer.parseInt(String.format("%.0f", scorePlayer1));
-        Log.w("scoreIntPlayer0", Integer.toString(scoreIntPlayer1));
+        getScores(intent);
 
         setContentView(R.layout.gameover_multiplayer);
         ImageButton playAgainButton = (ImageButton) findViewById(R.id.playAgain);
         playAgainButton.setOnClickListener(startButtonListener);
 
-        initiateViews();
+        initializeViews();
         displayWinner();
 
 
@@ -57,7 +51,19 @@ public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuIte
 
     }
 
-    public void initiateViews(){
+    public void getScores(Intent intent){
+        //get scores as float values
+        scorePlayer0 = intent.getFloatExtra("scorePlayer0", -1);
+        scorePlayer1 = intent.getFloatExtra("scorePlayer1", -1);
+        //gets player 1's score as an int
+        int scoreIntPlayer0 = Integer.parseInt(String.format("%.0f", scorePlayer0));
+        Log.w("scoreIntPlayer0", Integer.toString(scoreIntPlayer0));
+        //gets player 2's score as an int
+        int scoreIntPlayer1 = Integer.parseInt(String.format("%.0f", scorePlayer1));
+        Log.w("scoreIntPlayer0", Integer.toString(scoreIntPlayer1));
+    }
+
+    public void initializeViews(){
         //Player 1's score
         scorePlayer0View = (TextView) findViewById(R.id.scorePlayer0View);
         //Player 2's score
@@ -66,6 +72,7 @@ public class GameOverMultiplayer extends Activity implements PopupMenu.OnMenuIte
     }
 
     public void displayWinner(){
+        //Shows the players' scores
         scorePlayer0View.setText("Player 1: " + String.format("%.0f", scorePlayer0) + " km");
         scorePlayer1View.setText("Player 2: "+ String.format("%.0f", scorePlayer1) + " km");
 

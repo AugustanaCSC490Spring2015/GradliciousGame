@@ -23,8 +23,6 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
     float score;
     SharedPreferences highScorePref;
     SharedPreferences.Editor highScoreEditor;
-    TextView gameOverScore;
-    TextView bestScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +38,15 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
         highScoreEditor = highScorePref.edit();
 
         int highScore = highScorePref.getInt("highscore", 1000000000);
-
         int scoreInt = Integer.parseInt(String.format("%.0f", score));
         Log.w("scoreInt", Integer.toString(scoreInt));
 
-        if(scoreInt < highScore) {
-            highScoreEditor.putInt("highscore", scoreInt);
-            highScoreEditor.commit();
-        }
+        //Calculates whether the user's score ranks in the high scores
+        determineHighScore(highScore, scoreInt);
 
+        //Change the layout to the Game Over screen
         setContentView(R.layout.gameover);
+        //Allow user to start a new game
         ImageButton playAgainButton = (ImageButton) findViewById(R.id.playAgain);
         playAgainButton.setOnClickListener(startButtonListener);
 
@@ -60,12 +57,21 @@ public class GameOver extends Activity implements PopupMenu.OnMenuItemClickListe
 
     }
 
+    //Displays the user's scores
     public void displayEndGame(){
-        gameOverScore = (TextView) findViewById(R.id.gameOverScore);
-        bestScore = (TextView) findViewById(R.id.bestScore);
+        TextView gameOverScore = (TextView) findViewById(R.id.gameOverScore);
+        TextView bestScore = (TextView) findViewById(R.id.bestScore);
 
         gameOverScore.setText("Total Score: " + String.format("%.0f", score) + " km");
         bestScore.setText("Best Score: "+ Integer.toString(highScorePref.getInt("highscore", -1000)) + " km");
+    }
+
+    //Check to see if the user's score ranks in the high score list
+    public void determineHighScore(int highScore, int scoreInt){
+        if(scoreInt < highScore) {
+            highScoreEditor.putInt("highscore", scoreInt);
+            highScoreEditor.commit();
+        }
     }
 
 

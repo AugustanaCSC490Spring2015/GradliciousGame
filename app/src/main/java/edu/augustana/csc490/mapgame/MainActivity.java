@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
 
     }
 
-
+    // method that handles a user's click and launches the single player option
     public View.OnClickListener startButtonListener = new View.OnClickListener() {
 
         @Override
@@ -42,12 +42,13 @@ public class MainActivity extends Activity {
             Intent intent = new Intent(MainActivity.this, StreetMode.class);
             intent.putExtra("score", (float) 0);
             intent.putExtra("round", 0);
+            //load single player mode
             startActivity(intent);
 
         }
     };
 
-
+    // method that handles a user's click and launches the local multiplayer option
     public View.OnClickListener multiplayerButtonListener = new View.OnClickListener() {
 
         @Override
@@ -57,6 +58,7 @@ public class MainActivity extends Activity {
             intent.putExtra("score", (float) 0);
             intent.putExtra("round", 0);
             intent.putExtra("playerNum", 0);
+            //load multiplayer mode
             startActivity(intent);
 
         }

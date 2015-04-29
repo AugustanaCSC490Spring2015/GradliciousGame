@@ -41,27 +41,40 @@ public class MapMode extends Activity implements OnMapReadyCallback, PopupMenu.O
         Intent intent = getIntent();
         actualPosition = intent.getStringExtra("actualPosition");
         score = intent.getFloatExtra("score", -1);
-        round = intent.getIntExtra("round",-1);
 
         Log.w("position", actualPosition);
 
         setContentView(R.layout.mapview);
 
+        setRoundNumber(intent);
+
+        switchToStreetView();
+
+        createSubmitButton();
+
+        getMap();
+
+    }
+
+    public void setRoundNumber(Intent intent){
+        round = intent.getIntExtra("round",-1);
         TextView roundNumView = (TextView) findViewById(R.id.roundNumView);
         roundNumView.setText("Round "+ Integer.toString(round));
+    }
 
+    public void switchToStreetView(){
         ImageButton switchToStreet = (ImageButton) findViewById(R.id.button2);
         switchToStreet.setOnClickListener(switchToStreetListener);
+    }
 
+    public void createSubmitButton(){
         ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
         submitButton.setOnClickListener(switchToScoring);
+    }
 
+    public void getMap(){
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapviewfragment);
         mapFragment.getMapAsync(this);
-
-
-
-
     }
 
 
