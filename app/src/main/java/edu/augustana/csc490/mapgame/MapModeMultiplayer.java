@@ -49,28 +49,54 @@ public class MapModeMultiplayer extends Activity implements OnMapReadyCallback, 
         scorePlayer1 = intent.getFloatExtra("scorePlayer1", -1);
         playerNum = intent.getIntExtra("playerNum", -1);
 
-        round = intent.getIntExtra("round",-1);
-
         Log.w("position", actualPosition);
 
         setContentView(R.layout.mapview_multiplayer);
 
-        TextView roundNumView = (TextView) findViewById(R.id.roundNumView);
-        roundNumView.setText("Round "+ Integer.toString(round));
+        setRoundNumber(intent);
 
-        ImageButton switchToStreet = (ImageButton) findViewById(R.id.button2);
-        switchToStreet.setOnClickListener(switchToStreetListener);
+        switchToStreetView();
 
-        ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
-        submitButton.setOnClickListener(switchToScoring);
+        createSubmitButton();
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapviewfragment);
-        mapFragment.getMapAsync(this);
+        getMap();
+
+        /*
+        MapInstantiater multiPlayerMapSetup = new MapInstantiater(intent);
+
+        round = singlePlayerMapSetup.setRoundNumber();
+
+        singlePlayerMapSetup.setSwitchToStreetViewListener();
+
+        singlePlayerMapSetup.setSubmitButtonListener();
+
+        singlePlayerMapSetup.getMap();
+         */
 
         TextView playerNumView = (TextView) findViewById(R.id.playerNumView);
         playerNumView.setText("Player:" + (playerNum+1));
 
+    }
 
+    public void setRoundNumber(Intent intent){
+        round = intent.getIntExtra("round",-1);
+        TextView roundNumView = (TextView) findViewById(R.id.roundNumView);
+        roundNumView.setText("Round "+ Integer.toString(round));
+    }
+
+    public void switchToStreetView(){
+        ImageButton switchToStreet = (ImageButton) findViewById(R.id.button2);
+        switchToStreet.setOnClickListener(switchToStreetListener);
+    }
+
+    public void createSubmitButton(){
+        ImageButton submitButton = (ImageButton) findViewById(R.id.submitButton);
+        submitButton.setOnClickListener(switchToScoring);
+    }
+
+    public void getMap(){
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.mapviewfragment);
+        mapFragment.getMapAsync(this);
     }
 
 
