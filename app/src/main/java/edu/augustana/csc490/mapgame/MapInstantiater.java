@@ -24,6 +24,8 @@ import com.google.android.gms.maps.model.*;
 
 /**
  * Created by andrewshearouse11 on 4/29/2015.
+ * This class hosts shared code between the MapMode and MapModeMultiplayer classes
+ *
  */
 public class MapInstantiater extends Activity {
 
